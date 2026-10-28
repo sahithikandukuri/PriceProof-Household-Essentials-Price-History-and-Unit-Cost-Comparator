@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Price History Analytics — PriceProof</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/products.html" class="nav-link">Catalog</a></li>
+        <li><a href="/price-history.html" class="nav-link active">Price Trends</a></li>
+        <li><a href="/shopping-list.html" class="nav-link">Shopping Lists</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+        <div id="nav-auth-links" style="display:flex; align-items:center; gap:var(--space-sm);"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-xl) var(--space-md);">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:var(--space-lg); flex-wrap:wrap; gap:var(--space-md);">
+      <div>
+        <h1 style="font-size: 2.2rem;">Historical Price Analytics</h1>
+        <p>Interactive tracking of supermarket price shifts over time</p>
+      </div>
+
+      <!-- Timeframe Range Switcher -->
+      <div style="display:flex; gap:var(--space-xs); background:var(--color-surface); padding:4px; border-radius:var(--radius-md); border:1px solid var(--color-border);">
+        <button class="btn btn-sm btn-outline range-btn" data-range="7d">7 Days</button>
+        <button class="btn btn-sm btn-primary range-btn" data-range="30d">30 Days</button>
+        <button class="btn btn-sm btn-outline range-btn" data-range="3m">3 Months</button>
+        <button class="btn btn-sm btn-outline range-btn" data-range="6m">6 Months</button>
+        <button class="btn btn-sm btn-outline range-btn" data-range="1y">1 Year</button>
+        <button class="btn btn-sm btn-outline range-btn" data-range="all">All</button>
+      </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <div id="history-stats-container"></div>
+
+    <!-- Interactive Chart Container -->
+    <div style="background-color:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); box-shadow:var(--shadow-sm); min-height:420px; position:relative;">
+      <canvas id="price-history-chart" style="max-height: 380px; width: 100%;"></canvas>
+    </div>
+
+    <div style="margin-top:var(--space-lg); padding:var(--space-md); background:var(--color-surface-hover); border-radius:var(--radius-md); font-size:0.85rem; color:var(--color-text-muted);">
+      ℹ️ <strong>Data Integrity Notice:</strong> Observations represent verified price points logged in the PriceProof database. Missing or unchanged price periods reflect recorded stability rather than fabricated data points.
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/history.js"></script>
+</body>
+</html>

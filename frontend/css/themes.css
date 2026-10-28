@@ -1,0 +1,33 @@
+/* PriceProof: Theme Support (Light & Dark) */
+
+[data-theme="dark"] {
+  --color-primary: #20C997;
+  --color-primary-hover: #12B886;
+  --color-primary-light: #38D9A9;
+  --color-secondary: #172D24;
+  --color-secondary-hover: #1E3D31;
+  
+  --color-bg: #0F1714;
+  --color-surface: #16221D;
+  --color-surface-hover: #1E2D27;
+  --color-border: #283C34;
+  --color-border-focus: #20C997;
+
+  --color-text-primary: #EBF2EE;
+  --color-text-secondary: #A9BCB3;
+  --color-text-muted: #748980;
+  --color-text-inverse: #0F1714;
+
+  --color-accent: #F59F00;
+  --color-accent-light: #2E2413;
+  --color-success: #51CF66;
+  --color-success-bg: #142E1B;
+  --color-error: #FF6B6B;
+  --color-error-bg: #301717;
+  --color-info: #4DABF7;
+  --color-info-bg: #132438;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+}

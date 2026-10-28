@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Price Logger & Audit — PriceProof Admin</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span> <span style="font-size:0.75rem; background:var(--color-accent); color:#fff; padding:2px 8px; border-radius:var(--radius-full); margin-left:6px;">ADMIN</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/admin/dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="/admin/products.html" class="nav-link">Products</a></li>
+        <li><a href="/admin/prices.html" class="nav-link active">Price Logger</a></li>
+        <li><a href="/admin/imports.html" class="nav-link">Batch Feeds</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+        <div id="nav-auth-links" style="display:flex; align-items:center; gap:var(--space-sm);"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-xl) var(--space-md);" id="admin-container">
+    <div style="margin-bottom: var(--space-xl); display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:var(--space-md);">
+      <div>
+        <h1 style="font-size: 2.2rem;">Price Observation Logger</h1>
+        <p>Update live store pricing and append to immutable historical series</p>
+      </div>
+      <a href="/admin/dashboard.html" class="btn btn-outline btn-sm">&larr; Back to Dashboard</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl);">
+      <!-- Logger Form -->
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-xl); box-shadow:var(--shadow-sm);">
+        <h3 style="margin-bottom:var(--space-md);">Record New Price Observation</h3>
+
+        <form id="record-price-form">
+          <div class="form-group">
+            <label class="form-label" for="price-variant-select">Select Product Variant *</label>
+            <select id="price-variant-select" class="form-select" required></select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="price-store-select">Retailer Store *</label>
+            <select id="price-store-select" class="form-select" required></select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:var(--space-md);">
+            <div class="form-group">
+              <label class="form-label" for="price-amount-input">Selling Price (₹) *</label>
+              <input type="number" step="0.50" min="0" id="price-amount-input" class="form-input" placeholder="175.00" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="price-mrp-input">Printed MRP (₹)</label>
+              <input type="number" step="0.50" min="0" id="price-mrp-input" class="form-input" placeholder="230.00" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; margin-top:var(--space-md);">Log Price & Evaluate Alerts</button>
+        </form>
+      </div>
+
+      <!-- Audit Trail / Integrity Rules -->
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-xl); box-shadow:var(--shadow-sm);">
+        <h3 style="margin-bottom:var(--space-sm);">🔒 Pricing Audit Integrity</h3>
+        <p style="font-size:0.9rem; color:var(--color-text-secondary); margin-bottom:var(--space-md);">
+          PriceProof maintains an append-only audit trail. Historical price observations are never overwritten or deleted, ensuring authentic trend transparency for consumers.
+        </p>
+
+        <ul style="font-size:0.85rem; color:var(--color-text-muted); list-style-position:inside; display:flex; flex-direction:column; gap:8px;">
+          <li>Price updates immediately recalculate lowest unit cost badges across retailers.</li>
+          <li>If the updated price drops below any user's target price alert, in-app notifications are dispatched instantly.</li>
+          <li>All adjustments record the administrator ID and timestamp.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

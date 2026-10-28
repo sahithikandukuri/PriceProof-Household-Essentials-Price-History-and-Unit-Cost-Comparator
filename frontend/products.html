@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Catalog — PriceProof</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/products.html" class="nav-link active">Catalog</a></li>
+        <li><a href="/price-history.html" class="nav-link">Price Trends</a></li>
+        <li><a href="/shopping-list.html" class="nav-link">Shopping Lists</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+        <div id="nav-auth-links" style="display:flex; align-items:center; gap:var(--space-sm);"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-xl) var(--space-md);">
+    <!-- Breadcrumb & Title -->
+    <div style="margin-bottom: var(--space-lg);">
+      <span style="font-size:0.85rem; color:var(--color-text-muted);"><a href="/">Home</a> / Household Catalog</span>
+      <h1 style="font-size: 2.2rem; margin-top: 4px;">Household Essentials Catalog</h1>
+      <p>Compare verified grocery prices and standardized unit costs across Indian retailers</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-md); margin-bottom: var(--space-xl); display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);">
+      <div style="flex: 1; min-width: 260px;">
+        <input type="text" id="catalog-search" class="form-input" placeholder="🔍 Search by product name, brand, or type..." />
+      </div>
+
+      <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; align-items: center;">
+        <select id="category-filter" class="form-select" style="width: auto;">
+          <option value="">All Categories</option>
+        </select>
+
+        <select id="brand-filter" class="form-select" style="width: auto;">
+          <option value="">All Brands</option>
+        </select>
+
+        <select id="sort-select" class="form-select" style="width: auto;">
+          <option value="price_asc">Price: Lowest First</option>
+          <option value="price_desc">Price: Highest First</option>
+          <option value="name_asc">Name: A to Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results Status -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+      <span id="results-count" style="font-size: 0.9rem; color: var(--color-text-muted);">Loading products...</span>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="products-grid" class="product-grid"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/products.js"></script>
+</body>
+</html>

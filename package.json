@@ -1,0 +1,28 @@
+{
+  "name": "priceproof",
+  "version": "1.0.0",
+  "description": "Household Essentials Price History and Unit-Cost Comparator",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "grocery",
+    "price-comparison",
+    "unit-cost",
+    "supabase",
+    "express"
+  ],
+  "author": "PriceProof Team",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0"
+  }
+}

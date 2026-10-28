@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Lists & Savings Calculator — PriceProof</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/products.html" class="nav-link">Catalog</a></li>
+        <li><a href="/price-history.html" class="nav-link">Price Trends</a></li>
+        <li><a href="/shopping-list.html" class="nav-link active">Shopping Lists</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+        <div id="nav-auth-links" style="display:flex; align-items:center; gap:var(--space-sm);"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-xl) var(--space-md);" id="list-container">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:var(--space-xl); flex-wrap:wrap; gap:var(--space-md);">
+      <div>
+        <h1 style="font-size: 2.2rem;">Household Shopping Lists</h1>
+        <p>Estimate total basket costs across stores and discover optimal split-order savings</p>
+      </div>
+
+      <div style="display:flex; gap:var(--space-sm); align-items:center;">
+        <select id="list-select" class="form-select" style="min-width: 220px;"></select>
+        <button id="create-list-btn" class="btn btn-primary btn-sm">+ New List</button>
+      </div>
+    </div>
+
+    <!-- Savings & Store Estimates -->
+    <div id="estimate-summary-container" style="margin-bottom: var(--space-2xl);"></div>
+
+    <!-- Items in Active List -->
+    <div style="margin-bottom: var(--space-md); display:flex; justify-content:space-between; align-items:center;">
+      <h3>Basket Items</h3>
+      <a href="/products.html" class="btn btn-outline btn-sm">+ Add More Essentials</a>
+    </div>
+
+    <div id="list-items-container"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/shopping-list.js"></script>
+</body>
+</html>

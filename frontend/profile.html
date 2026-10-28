@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile & Alerts — PriceProof</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/products.html" class="nav-link">Catalog</a></li>
+        <li><a href="/price-history.html" class="nav-link">Price Trends</a></li>
+        <li><a href="/shopping-list.html" class="nav-link">Shopping Lists</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+        <div id="nav-auth-links" style="display:flex; align-items:center; gap:var(--space-sm);"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-xl) var(--space-md);">
+    <div style="margin-bottom: var(--space-xl);">
+      <h1 style="font-size: 2.2rem;">Account & Notification Center</h1>
+      <p>Manage your account settings, city preferences, and price alerts</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl);">
+      <!-- Left: Notifications & Active Alerts -->
+      <div>
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); margin-bottom:var(--space-xl); box-shadow:var(--shadow-sm);">
+          <h3 style="margin-bottom:var(--space-md);">🔔 Price-Drop Notifications</h3>
+          <div id="notifications-container">
+            <div class="skeleton" style="height:60px;"></div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); box-shadow:var(--shadow-sm);">
+          <h3 style="margin-bottom:var(--space-md);">🎯 Active Target Price Alerts</h3>
+          <div id="alerts-container">
+            <div class="skeleton" style="height:60px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Profile Settings -->
+      <div>
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); box-shadow:var(--shadow-sm);">
+          <h3 style="margin-bottom:var(--space-md);">👤 Profile Information</h3>
+
+          <form id="profile-form">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="prof-name" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="prof-email" class="form-input" readonly disabled style="opacity:0.7;" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Primary Shopping City</label>
+              <select id="prof-city" class="form-select">
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Chennai">Chennai</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Account Role</label>
+              <input type="text" id="prof-role" class="form-input" readonly disabled style="opacity:0.7; font-weight:600;" />
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top:var(--space-md);">Save Preferences</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/alerts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (!window.AuthManager?.isAuthenticated()) {
+        window.location.href = '/login.html';
+        return;
+      }
+
+      try {
+        const res = await window.API.get('/user/profile');
+        const user = res.user;
+
+        document.getElementById('prof-name').value = user.profile?.full_name || '';
+        document.getElementById('prof-email').value = user.email || '';
+        document.getElementById('prof-city').value = user.profile?.city || 'Mumbai';
+        document.getElementById('prof-role').value = (user.role || 'customer').toUpperCase();
+
+        document.getElementById('profile-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          try {
+            await window.API.patch('/user/profile', {
+              full_name: document.getElementById('prof-name').value,
+              city: document.getElementById('prof-city').value,
+            });
+            window.showToast('Profile preferences saved!');
+          } catch (err) {
+            window.showToast(err.message || 'Failed to save', 'error');
+          }
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+/* PriceProof: CSS Design System Tokens */
+:root {
+  /* Brand Palette */
+  --color-primary: #087F5B;
+  --color-primary-hover: #066549;
+  --color-primary-light: #0ca678;
+  --color-secondary: #E6F4EA;
+  --color-secondary-hover: #d2edd9;
+  
+  /* Neutral Colors */
+  --color-bg: #F8FAF9;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F2F5F3;
+  --color-border: #E1E7E4;
+  --color-border-focus: #087F5B;
+  
+  /* Text */
+  --color-text-primary: #172B24;
+  --color-text-secondary: #4B6358;
+  --color-text-muted: #798E85;
+  --color-text-inverse: #FFFFFF;
+
+  /* Accent & Feedback */
+  --color-accent: #E9A23B;
+  --color-accent-light: #FDF4E6;
+  --color-success: #2B8A3E;
+  --color-success-bg: #EBFBEE;
+  --color-error: #D64545;
+  --color-error-bg: #FFF5F5;
+  --color-info: #1971C2;
+  --color-info-bg: #E7F5FF;
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(18, 43, 34, 0.05);
+  --shadow-md: 0 4px 12px rgba(18, 43, 34, 0.08);
+  --shadow-lg: 0 10px 25px rgba(18, 43, 34, 0.12);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}

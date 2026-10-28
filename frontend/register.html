@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create an Account — PriceProof</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span></span>
+      </a>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="flex:1; display:flex; align-items:center; justify-content:center; padding: var(--space-2xl) var(--space-md);">
+    <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-2xl); width:100%; max-width:440px; box-shadow:var(--shadow-md);">
+      <h2 style="font-size: 1.8rem; margin-bottom: var(--space-xs);">Join PriceProof</h2>
+      <p style="margin-bottom: var(--space-lg); font-size: 0.95rem;">Start discovering the true unit-cost value on your monthly groceries.</p>
+
+      <div id="auth-error-box" style="display:none; padding:var(--space-sm) var(--space-md); background:var(--color-error-bg); color:var(--color-error); border-radius:var(--radius-md); font-size:0.85rem; margin-bottom:var(--space-md);"></div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label class="form-label" for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="you@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Password</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="At least 6 characters" minlength="6" required />
+        </div>
+
+        <button type="submit" id="reg-submit-btn" class="btn btn-primary" style="width: 100%; margin-top: var(--space-md);">Create Free Account</button>
+      </form>
+
+      <div style="margin-top: var(--space-lg); text-align: center; font-size: 0.9rem;">
+        Already registered? <a href="/login.html">Sign in here</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('register-form');
+      const errBox = document.getElementById('auth-error-box');
+      const btn = document.getElementById('reg-submit-btn');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errBox.style.display = 'none';
+        btn.textContent = 'Creating account...';
+        btn.disabled = true;
+
+        const name = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const password = document.getElementById('reg-password').value;
+
+        try {
+          await window.AuthManager.signUp(email, password, name);
+          window.showToast('Account created successfully!');
+          setTimeout(() => { window.location.href = '/products.html'; }, 800);
+        } catch (err) {
+          errBox.textContent = err.message || 'Registration failed. Please try again.';
+          errBox.style.display = 'block';
+          btn.textContent = 'Create Free Account';
+          btn.disabled = false;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

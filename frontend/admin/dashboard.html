@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — PriceProof</title>
+  <link rel="stylesheet" href="/css/variables.css" />
+  <link rel="stylesheet" href="/css/themes.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱 Price<span class="highlight">Proof</span> <span style="font-size:0.75rem; background:var(--color-accent); color:#fff; padding:2px 8px; border-radius:var(--radius-full); margin-left:6px;">ADMIN</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/admin/dashboard.html" class="nav-link active">Dashboard</a></li>
+        <li><a href="/admin/products.html" class="nav-link">Products</a></li>
+        <li><a href="/admin/prices.html" class="nav-link">Price Logger</a></li>
+        <li><a href="/admin/imports.html" class="nav-link">Batch Feeds</a></li>
+        <li><a href="/" class="nav-link">View Public Site &rarr;</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn btn-icon" onclick="window.ThemeManager?.toggleTheme()">🌙</button>
+        <div id="nav-auth-links" style="display:flex; align-items:center; gap:var(--space-sm);"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: var(--space-xl) var(--space-md);" id="admin-container">
+    <div style="margin-bottom: var(--space-xl);">
+      <h1 style="font-size: 2.2rem;">Administrative Overview</h1>
+      <p>Operational control center for managing catalog integrity, retailers, and prices</p>
+    </div>
+
+    <!-- Statistics Overview Cards -->
+    <div id="admin-stats-overview">
+      <div class="skeleton" style="height: 100px; margin-bottom: var(--space-xl);"></div>
+    </div>
+
+    <!-- Quick Management Hub -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:var(--space-sm);">📦</div>
+        <h3>Product Catalog</h3>
+        <p style="font-size:0.9rem; margin:var(--space-xs) 0 var(--space-md) 0;">Add canonical household products, configure package variants, assign categories and brand identities.</p>
+        <a href="/admin/products.html" class="btn btn-primary btn-sm">Manage Products &rarr;</a>
+      </div>
+
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:var(--space-sm);">🏷️</div>
+        <h3>Price Observation Logger</h3>
+        <p style="font-size:0.9rem; margin:var(--space-xs) 0 var(--space-md) 0;">Enter new store prices, append immutable historical observations, and trigger price-drop alerts automatically.</p>
+        <a href="/admin/prices.html" class="btn btn-primary btn-sm">Log New Price &rarr;</a>
+      </div>
+
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-lg); box-shadow:var(--shadow-sm);">
+        <div style="font-size:2rem; margin-bottom:var(--space-sm);">⚡</div>
+        <h3>Batch Import Ingestion</h3>
+        <p style="font-size:0.9rem; margin:var(--space-xs) 0 var(--space-md) 0;">Simulate retailer price feed imports, view error logs, and inspect automatic update status.</p>
+        <a href="/admin/imports.html" class="btn btn-primary btn-sm">Run Import Feeds &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
